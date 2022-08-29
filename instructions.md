@@ -28,6 +28,8 @@ python src/main/assignment/load_database.py
 7 - Get random image as image file download:  
 python src/main/assignment/main.py  
   
+Files will be downloaded into xml_files
+  
 8 - At end of session deactivate venv  
 deactivate  
   
