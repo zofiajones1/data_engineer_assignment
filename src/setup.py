@@ -4,24 +4,33 @@ from setuptools import setup
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
+
 setup(
-    name="example",
+    name="analytics_database",
     version="0.0.1",
     # The project's main homepage.
-    url="https://gitlab.com/stoneid/stoneid",
+    url="https://github.com/salimfadhley/data_engineer_assignment",
     # Author details
-    author="<Add your name>",
-    author_email="<Add your email address>",
+    author="Zofia Jones",
+    author_email="zofia.jones@gmail.com",
     # Choose your license
     license="All Rights Reserved",
     package_dir={"": "main"},
     entry_points={"console_scripts": ["db_import=assignment.main:main"]},
     install_requires=[
-        "sqlalchemy==1.2.13",
+        "sqlalchemy==1.4.40",
         "beautifulsoup4",
-        "requests"
+        "requests",
+        "psycopg2-binary",
+	"random2==1.0.1",
+	"opencv-python==4.6.0.66",
+	"scikit-image==0.19.3",
+	"python-dotenv==0.20.0",
+        "wheel==0.37.1",
+        "pyyaml==6.0",
     ],
     tests_require=[
         "pytest",
     ],
+    test_suite="tests/test_assignment/example_test.py"
 )

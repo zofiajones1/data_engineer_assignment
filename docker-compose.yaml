@@ -6,14 +6,10 @@ services:
     ports:
     - 5432:5432/tcp
     environment:
-    - POSTGRES_PASSWORD=secretpassword
-    - POSTGRES_USER=application
-    - POSTGRES_DB=application
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
 
     hostname: postgres
     volumes:
-    - ./pgdata/data:/var/lib/postgresql/data
-
-
-#volumes:
-#  pgdata-volume:
+#    - ./pgdata/data:/var/lib/postgresql/data
+     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
