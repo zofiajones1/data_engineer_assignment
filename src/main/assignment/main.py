@@ -35,9 +35,11 @@ def main():
 
 	a = e.ElementTree(r)
 
+	#Find xml directory
 	load_dotenv( find_dotenv()  )
 	XML_DIR = os.environ.get('XML_DIR')
 
+	#Write to xml file with timestamp
 	now0 = str(datetime.datetime.now())
 	items = now0.split('.')
 #	print(items)
