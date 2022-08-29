@@ -42,6 +42,13 @@ if [ $reply == "Y"  ];then
 elif [  $reply == "n"  ];then
 		mkdir data
 		datapath="data"
+
+                wget https://academictorrents.com/download/5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent
+                sudo apt install transmission-cli
+                stop_script="killall transmission-cli"
+                transmission-cli 5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent -w data -f finish.sh  -p 51418
+                tar -xvf data/apod.tar -C data
+
 else
 	echo "Response not recognised."
 	exit 1
