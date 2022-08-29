@@ -21,7 +21,7 @@ setup(
         "sqlalchemy==1.4.40",
         "beautifulsoup4",
         "requests",
-        "psycopg2-binary",
+        "psycopg2-binary==2.9.3",
 	"random2==1.0.1",
 	"opencv-python==4.6.0.66",
 	"scikit-image==0.19.3",
