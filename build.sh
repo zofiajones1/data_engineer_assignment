@@ -9,6 +9,9 @@ python3 -m venv ./venv
 echo -n "Have you downloaded the data?(Y/n):"
 read -r reply
 
+echo -n "Do you want to try transmission-cli?  You may need to stop the process manually once its finished downloading tar.(Y/n)"
+read -r  transmission
+
 if [ $reply == "Y"  ];then
 		echo -n "Please paste the directory with downloaded tar file. No (~):"
 		read -r datapath
@@ -31,8 +34,12 @@ if [ $reply == "Y"  ];then
 				mkdir data
 			fi
 			if [ ! data/apod.tar  ];then
+                        if [ $transmission == "Y"   ];then
 			stop_script="killall transmission-cli"
 			transmission-cli -f $stop_script 5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent -w data
+                        else
+                        echo "Please download torrent from https://academictorrents.com/download/5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent."
+                        fi
 			fi
 			if [ data/apod.tar  ];then
 			tar -xvf data/apod.tar -C data
@@ -42,12 +49,15 @@ if [ $reply == "Y"  ];then
 elif [  $reply == "n"  ];then
 		mkdir data
 		datapath="data"
-
+                if [ $transmission == "Y"   ];then
                 wget https://academictorrents.com/download/5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent
                 sudo apt install transmission-cli
                 stop_script="killall transmission-cli"
-                transmission-cli 5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent -w data -f finish.sh  -p 51418
+                nohup transmission-cli 5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent -w data -f finish.sh  -p 51418
                 tar -xvf data/apod.tar -C data
+                else
+                echo "Please download torrent from https://academictorrents.com/download/5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent."
+                fi
 
 else
 	echo "Response not recognised."
