@@ -9,8 +9,10 @@ python3 -m venv ./venv
 echo -n "Have you downloaded the data?(Y/n):"
 read -r reply
 
-echo -n "Do you want to try transmission-cli?  You may need to stop the process manually once its finished downloading tar.(Y/n)"
+echo -n "Do you want to try transmission-cli(Ubuntu)?  You may need to stop the process manually once its finished downloading tar and restart script.(Y/n)"
 read -r  transmission
+
+echo "Jpgs will be available in data directory."
 
 if [ $reply == "Y"  ];then
 		echo -n "Please paste the directory with downloaded tar file. No (~):"
@@ -27,14 +29,15 @@ if [ $reply == "Y"  ];then
 			tar -xvf $file -C data
 
 		else
-			echo "Tar file not found.  Downloading..."
+			echo "Tar file not found.  Downloading torrent file."
 			wget https://academictorrents.com/download/5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent
-			sudo apt install transmission-cli
 			if [ ! -d data  ];then
 				mkdir data
 			fi
 			if [ ! data/apod.tar  ];then
                         if [ $transmission == "Y"   ];then
+                        echo "Downloading tar using transmission-cli... You may need to exit manually once complete and restart script."
+                        sudo apt install transmission-cli
 			stop_script="killall transmission-cli"
 			transmission-cli -f $stop_script 5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent -w data
                         else
@@ -50,6 +53,7 @@ elif [  $reply == "n"  ];then
 		mkdir data
 		datapath="data"
                 if [ $transmission == "Y"   ];then
+                echo "Downloading tar using transmission-cli... You may need to exit manually once complete and restart script."
                 wget https://academictorrents.com/download/5f755e078ee9195b8ae0b3336710e6ce92ef3251.torrent
                 sudo apt install transmission-cli
                 stop_script="killall transmission-cli"
@@ -88,6 +92,8 @@ sudo groupadd docker
 USER=$(whoami)
 sudo gpasswd -a $USER docker
 docker run hello
+else
+echo "Docker is installed."
 fi
 
 

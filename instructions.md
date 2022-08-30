@@ -4,6 +4,7 @@ bash build.sh
   
 Jpgs will be found in data/apod.  
 If you don't have the .tar bitorrent client will download them for you.  
+Option to use transmission-cli for Ubuntu.  May need to stop seeding and restart build.sh
   
 2 - Activate venv:  
 source venv/bin/activate  
